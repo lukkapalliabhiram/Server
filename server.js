@@ -156,7 +156,6 @@ app.get('/api/events/:eventId', async (req, res) => {
 });
 
 
-app.use(express.static("pages/assets"));
 app.use(cookieParser());
 const cookie_expire = 1000 * 60 * 60 * 1;
 app.use(
@@ -225,41 +224,7 @@ app.get('/userdata', async (req, res) => {
 
 console.log(session.user);
 
-app.get('/', function (req, res) {
-  // console.log(req.session);
-  if (req.session.login) {
-    if (req.session.login == 0) {
-      res.redirect('/login');
-    }
-    else {
-      // console.log(req.session.role)
-      req.session.save();
-      // if(req.session.role==1){
-      //   res.json(rquser);
-      // }
-      // else if(req.session.role==0){
 
-      // }
-      res.json(req.session.user)
-    }
-  }
-  else {
-    res.redirect('/login');
-  }
-});
-
-
-app.get('/login', function (req, res) {
-  console.log("login")
-  // console.log(req.session);
-  if (req.session.login) {
-    req.session.save();
-    res.redirect('/');
-  }
-  else {
-    res.sendFile('pages/login.html', { root: '.' });
-  }
-});
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
