@@ -1,0 +1,197 @@
+
+html,body{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Montserrat';
+    font-size: small;
+   /* background-color:rgb(52, 86, 130);*/
+    
+    background: url("img/5.jpg") no-repeat center; 
+}
+
+/**
+ * Page background
+ 
+ .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: url("https://images.unsplash.com/photo-1568309747556-2f49848f5204?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60") no-repeat center;
+    background-size: cover;
+  }
+  .user_options-container {
+    position: relative;
+    width: 80%;
+  }
+  .user_options-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(34, 34, 34, 0.85);
+    border-radius: 3px;
+  }
+  */
+#box{
+    height: 250px;
+    width: 1000px;
+    border: 4px white solid;
+   /* border-radius: 5px; */
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#main{
+    height: 450px;
+    width: 450px;
+    background-color:white;
+    /*border-radius: 5px;*/
+    position: absolute;
+    top:50%;
+    left: 70%;
+    transform: translate(-50%,-50%);
+    z-index: 99;
+}
+#loginform,#signupform{
+    position: absolute;
+    top:50%;
+    left: 70%;
+    transform: translate(-50%,-50%);
+    z-index: 999;
+}
+#signupform{
+    top:50%;
+    left: 75%;
+    visibility: hidden;
+}
+#forget-pass{
+  font-family: 'Montserrat';
+  font-size: 10px;
+}
+#loginform h1,#signupform h1{
+    font-family: 'Montserrat';
+    font-size: 25px;
+    color:#65addd;
+}
+#loginform input,#signupform input{
+    height: 40px;
+    width: 300px;
+    border: 0px;
+    outline:3;
+    border-bottom: 1px solid black;
+    margin: 5px;
+}
+#loginform button,#signupform button{
+    height: 35px;
+    width: 130px;
+    background-color:#65addd;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    color:white;
+    border: none;
+    outline: none;
+   /* border-radius: 5px;*/
+    margin-top: 30px;
+    margin-left: 175px;
+}
+
+#loginform button:hover,#signupform button:hover {
+  background-color: #EEEEEE;
+  color: #2d2d2d;
+  cursor: pointer;
+  border: 1px black solid;
+}
+/* social */
+
+.social-login{
+    position:relative;
+    float: left;
+    width: 100%;
+    height:auto;
+    padding: 10px 0 15px 0;
+    border-bottom: 1px transparent;
+  }
+  .social-login a{
+    position:relative;
+    float: left;
+    width:calc(40% - 8px);
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,0.05);
+    padding: 12px;
+    border-radius: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 0 3%;
+    text-align:center;
+  }
+  .social-login a i{
+    position: relative;
+    float: left;
+    width: 10px;
+    top: 2px;
+  }
+
+#login_btn,#signup_btn{
+    height: 35px;
+    width: 120px;
+    background-color:transparent;
+    color:white;
+    border:1px solid white;
+   /* border-radius: 5px;*/
+    outline: none;
+    position: absolute;
+    left: 75%;
+    top:65%;
+    transform: translate(-50%,-50%);
+    transition: all .5s;
+}
+
+#signup_btn{
+    left: 25%;
+}
+
+#login_btn:hover,#signup_btn:hover{
+    background-color: white;
+    color: #2d2d2d;
+    cursor: pointer;
+}
+
+#login_msg,#signup_msg{
+    font-family: 'Montserrat';
+    
+    font-size: 25px;
+    color:white;
+    position: absolute;
+    top:35%;
+    left: 75%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+#signup_msg{
+    left: 25%;
+}
+
+.wrapper-class input[type="radio"] {
+  width: 15px;
+}
+
+.wrapper-class label {
+  display: inline;
+  margin-left: 5px;
+  }
+
+  .popup-overlay {
+    visibility:hidden;
+    }
+    
+    .popup-content {
+    visibility:hidden;
+    }
