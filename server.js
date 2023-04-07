@@ -363,5 +363,5 @@ app.get('/players', async (req, res) => {
 
 require("./config/passport")(passport);// Routes
 
-const port = process.env.PORT || 3500; // process.env.port is Heroku's port if you choose to deploy the app there
+const port = process.env.PORT || 10000; // process.env.port is Heroku's port if you choose to deploy the app there
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
