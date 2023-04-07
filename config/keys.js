@@ -1,10 +1,10 @@
 module.exports = {
   mongoURI: "mongodb+srv://hanabihyuga:hanabihyuga@hanabihyuga.stcwckw.mongodb.net/?retryWrites=true&w=majority",
   secretOrKey: "secret",
-  GOOGLE_CLIENT_ID: '701163878008-v9r4hj13l4ra32qsf71p1n0821n7iu70.apps.googleusercontent.com',
-  GOOGLE_CLIENT_SECRET: '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',
+  GOOGLE_CLIENT_ID: '538347350932-g13bkdbe6lkmcju1l3a716m4ims42o0j.apps.googleusercontent.com',
+  GOOGLE_CLIENT_SECRET: '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',
   URL : 'https://backend-4gbl.onrender.com',
-  GMAIL_USER: 'kukkapalliabhiram@gmail.com',
-  GMAIL_PASS: 'Abcdbetabd@77',
+  GMAIL_USER: 'hanabiyuga2023@gmail.com',
+  GMAIL_PASS: 'ojfdlqwcsrjleefu',
   client_URL: 'https://hanabi-hyuga.onrender.com',
 }; 
