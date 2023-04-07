@@ -6,5 +6,5 @@ module.exports = {
   URL : 'http://localhost:3500',
   GMAIL_USER: 'hanabiyuga2023@gmail.com',
   GMAIL_PASS: 'ojfdlqwcsrjleefu',
-  client_URL: 'http://localhost:3000',
+  client_URL: 'https://hanabi-hyuga.onrender.com',
 }; 
