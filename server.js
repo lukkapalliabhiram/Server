@@ -179,7 +179,6 @@ app.get('/api/events/:eventId', async (req, res) => {
 });
 
 
-app.use(express.static("pages/assets"));
 app.use(cookieParser());
 const cookie_expire = 1000 * 60 * 60 * 1;
 app.use(
@@ -250,6 +249,12 @@ console.log(session.user);
 
 
 
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/forgotPassword', function (req, res) {
+  res.sendFile('pages/forgot_password.html', { root: '.' })
+});
 
 
 app.get('/auth/google/callback',
@@ -381,5 +386,5 @@ app.get('/players', async (req, res) => {
 
 require("./config/passport")(passport);// Routes
 
-const port = process.env.PORT || 3500; // process.env.port is Heroku's port if you choose to deploy the app there
+const port = process.env.PORT || 10000; // process.env.port is Heroku's port if you choose to deploy the app there
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
