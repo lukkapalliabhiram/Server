@@ -23,6 +23,10 @@ const reservationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rating: {
+    type: Number,
+    default: null,
+  },
 });
 
 const Reservation = mongoose.model("Reservations", reservationSchema);

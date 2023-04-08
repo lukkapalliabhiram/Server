@@ -73,6 +73,29 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
+app.put('/api/reservation/rating/:reservationId', async (req, res) => {
+  try {
+    const reservationId = req.params.reservationId;
+    const rating = req.body.rating;
+
+    const result = await Reservation.updateOne(
+      { _id: mongoose.Types.ObjectId(reservationId) },
+      { $set: { rating: rating } },
+    );
+
+    if (result.matchedCount === 1) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Reservation not found' });
+    }
+  } catch (error) {
+    console.error('Error updating reservation rating:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 
 
@@ -225,48 +248,8 @@ app.get('/userdata', async (req, res) => {
 
 console.log(session.user);
 
-app.get('/', function (req, res) {
-  // console.log(req.session);
-  if (req.session.login) {
-    if (req.session.login == 0) {
-      res.redirect('/login');
-    }
-    else {
-      // console.log(req.session.role)
-      req.session.save();
-      // if(req.session.role==1){
-      //   res.json(rquser);
-      // }
-      // else if(req.session.role==0){
-
-      // }
-      res.json(req.session.user)
-    }
-  }
-  else {
-    res.redirect('/login');
-  }
-});
 
 
-app.get('/login', function (req, res) {
-  console.log("login")
-  // console.log(req.session);
-  if (req.session.login) {
-    req.session.save();
-    res.redirect('/');
-  }
-  else {
-    res.sendFile('pages/login.html', { root: '.' });
-  }
-});
-
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-app.get('/forgotPassword', function (req, res) {
-  res.sendFile('pages/forgot_password.html', { root: '.' })
-});
 
 
 app.get('/auth/google/callback',
