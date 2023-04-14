@@ -1,4 +1,5 @@
 const express = require("express");
+const nodemailer = require('nodemailer');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -95,7 +96,72 @@ app.put('/api/reservation/rating/:reservationId', async (req, res) => {
 });
 
 
+app.get('/api/venues/:eventId', async (req, res) => {
+  const eventId = req.params.eventId;
+  try {
+    const event = await Venue.findById(eventId); // Assuming you have an Event model
+    res.json(event);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching event by ID' });
+  }
+});
 
+app.get('/api/activities/:eventId', async (req, res) => {
+  const eventId = req.params.eventId;
+  try {
+    const event = await activity.findById(eventId); // Assuming you have an Event model
+    res.json(event);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching event by ID' });
+  }
+});
+
+app.get('/api/players/:eventId', async (req, res) => {
+  const eventId = req.params.eventId;
+  try {
+    const event = await player.findById(eventId); // Assuming you have an Event model
+    res.json(event);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching event by ID' });
+  }
+});
+
+app.post("/send-invitation", async (req, res) => {
+  const { userName, inviteEmail, reservationId, value } = req.body;
+
+  // Configure your email server credentials and settings
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: "hanabiyuga2023@gmail.com",
+      pass: "ojfdlqwcsrjleefu"
+    },
+    port: 465,
+    host: 'smtp.gmail.com'
+  });
+  const inviteUrl = `https://hanabi-hyuga.onrender.com/invitation/${value}/${reservationId}`;
+  const emailContent = `
+  <p>You have been invited to join an event by ${userName}. Click the link below to see the event details:</p>
+  <p><a href="${inviteUrl}">${inviteUrl}</a></p>
+`;
+  // Configure the email content
+  const mailOptions = {
+    from: '"Hanabi Yuga" <your.email@gmail.com>',
+    to: inviteEmail,
+    subject: "You are invited to an event",
+    html: emailContent,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 
