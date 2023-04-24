@@ -194,6 +194,7 @@ router.post("/login", (req, res) => {
   const userProfile = {};        
   User.findOne({ email }).then(async user => {
     // Check if user exists
+    console.log("User exists!")
     if (!user) {
       Owner.findOne({ email }).then(async owner => {
         // Check if user exists

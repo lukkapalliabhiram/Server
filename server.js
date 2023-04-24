@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const db = require("./config/keys").mongoURI;
 const users = require("./models/validation/routes/loginApi");
+const owners = require("./models/validation/routes/ownerApi");
 const app = express();// Bodyparser middleware
 const GOOGLE_CLIENT_ID = require("./config/keys").GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = require("./config/keys").GOOGLE_CLIENT_SECRET;
@@ -14,6 +15,8 @@ const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const request = require('request');
 const cors = require('cors');
+const multer = require('multer');
+const fs = require('fs');
 const Reservation = require('./models/Reservation');
 
 const stripe = require("stripe")('sk_test_51Mn4LdAFfsqlcVQEYKs5iJqqqBrYpmZkyJtAGUdzs0370c8BzGj464gvD0nGqrOnmT6Jzf5M8yvC8iNvNwm95Owu00nbXIADrF');
@@ -27,6 +30,27 @@ const calculateOrderAmount = (items) => {
   // people from directly manipulating the amount on the client
   return 1400;
 };
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../user_dashboards/public/img/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
+
+app.post('/api/uploadImage', upload.single('image'), (req, res) => {
+  const { name, description } = req.body;
+  const { filename } = req.file;
+  // res.json({success: true, message: 'Image uploaded successfully.'});
+  // res.status(200).send('Image uploaded successfully.');
+  res.status(200).json({ message: 'Image uploaded successfully.' });
+});
+
 
 const chargeCustomer = async (customerId) => {
   // Lookup the payment methods available for the customer
@@ -293,6 +317,7 @@ passport.use(new GoogleStrategy({
 app.get('/error', (req, res) => res.redirect('/login' + req.body));
 app.get('/success', (req, res) => res.redirect('/'));
 app.use("/users", users);
+app.use("/owners", owners);
 
 
 app.get('/userdata1', (req, res) => {
