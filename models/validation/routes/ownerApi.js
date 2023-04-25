@@ -138,11 +138,11 @@ router.post("/venueRegister", async (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  // req.body.facilities = JSON.parse(req.body.facilities);
-  // console.log(req.body.facilities);
-  // req.body.availableTimeSlots = JSON.parse(req.body.availableTimeSlots);
-  // console.log(req.body.availableTimeSlots);
-  // console.log(req.body)
+  req.body.facilities = JSON.parse(req.body.facilities);
+  console.log(req.body.facilities);
+  req.body.availableTimeSlots = JSON.parse(req.body.availableTimeSlots);
+  console.log(req.body.availableTimeSlots);
+  console.log(req.body)
   const newVenue = new Venues(req.body);
     // Save the data to MongoDB
   newVenue
