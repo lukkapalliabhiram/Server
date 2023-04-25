@@ -107,7 +107,7 @@ router.post("/updateVenues", async (req, res) => {
       console.log(req.body);
       collection.updateOne({ _id: ObjectId(req.body.eventID)}, { $set: 
         { venueName: req.body.venueName, location: req.body.location, sportName: req.body.sportName, description: req.body.description, image: req.body.image,
-          availableTimeSlots: availableTimeSlots, facilities: facilities, date: req.body.date, cost: req.body.cost
+          availableTimeSlots: availableTimeSlots, facilities: facilities, date: req.body.date, cost: req.body.cost, maxCapacity: req.body.maxCapacity
         } }, (err, result) => {
         if (err) {
           console.log(err);
@@ -276,7 +276,7 @@ router.post("/updateActivity", async (req, res) => {
       console.log(req.body);
       collection.updateOne({ _id: ObjectId(req.body.eventID)}, { $set: 
         { activityName: req.body.activityName, activityLocation: req.body.location, description: req.body.description, image: req.body.image,
-          availableTimeSlots: availableTimeSlots, facilities: facilities, date: req.body.date, cost: req.body.cost, ageRange: req.body.ageRange
+          availableTimeSlots: availableTimeSlots, facilities: facilities, date: req.body.date, cost: req.body.cost, ageRange: req.body.ageRange, maxCapacity: req.body.maxCapacity
         } }, (err, result) => {
         if (err) {
           console.log(err);
