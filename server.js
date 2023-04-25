@@ -244,6 +244,44 @@ app.get('/api/reservations/user/:userEmail', async (req, res) => {
 });
 
 
+app.post("/send-confirmation-email", async (req, res) => {
+  const { userEmail, venueName, bookingTime } = req.body;
+
+  // Configure your email server credentials and settings
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: "hanabiyuga2023@gmail.com",
+      pass: "ojfdlqwcsrjleefu"
+    },
+    port: 465,
+    host: 'smtp.gmail.com'
+  });
+
+  const emailContent = `
+  <p>Your booking at ${venueName} has been confirmed!</p>
+  <p>Time Slot: ${bookingTime}</p>
+  <p>Thank you for choosing our service!</p>
+`;
+
+  // Configure the email content
+  const mailOptions = {
+    from: '"Hanabi Yuga" <your.email@gmail.com>',
+    to: userEmail,
+    subject: "Booking Confirmation",
+    html: emailContent,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
 app.delete('/api/reservations/cancel/:reservationId', async (req, res) => {
   const reservationId = req.params.reservationId;
   try {
@@ -476,25 +514,7 @@ app.get('/players', async (req, res) => {
 });
 
 
-app.post("/send-confirmation-email", async (req, res) => {
-  const { userEmail, venueName, bookingTime } = req.body;
 
-  try {
-    await sendEmail({
-      to: userEmail,
-      subject: "Booking Confirmation",
-      text: `Dear ${userEmail},\n\nYour booking at ${venueName} for ${bookingTime} has been confirmed. Thank you for choosing our service!\n\nBest Regards,\nYour Company Name`,
-    });
-
-    res.status(200).json({
-      message: "Email sent successfully",
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: "Error sending email",
-    });
-  }
-});
 
 
 require("./config/passport")(passport);// Routes
