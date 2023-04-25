@@ -16,6 +16,7 @@ const cookieParser = require("cookie-parser");
 const request = require('request');
 const cors = require('cors');
 const multer = require('multer');
+const sendEmail = require("./sendemail");
 const fs = require('fs');
 const Reservation = require('./models/Reservation');
 
@@ -471,6 +472,27 @@ app.get('/players', async (req, res) => {
   } catch (err) {
     console.error('Error retrieving players:', err);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+app.post("/send-confirmation-email", async (req, res) => {
+  const { userEmail, venueName, bookingTime } = req.body;
+
+  try {
+    await sendEmail({
+      to: userEmail,
+      subject: "Booking Confirmation",
+      text: `Dear ${userEmail},\n\nYour booking at ${venueName} for ${bookingTime} has been confirmed. Thank you for choosing our service!\n\nBest Regards,\nYour Company Name`,
+    });
+
+    res.status(200).json({
+      message: "Email sent successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error sending email",
+    });
   }
 });
 
